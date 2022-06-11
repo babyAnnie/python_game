@@ -21,4 +21,4 @@ This is a shooting game. When an alien invades, the rocket shoots out a bullet, 
 <img src="./images/game.png" alt="Page renderings" />
 
 ## Game download
-[Download alien invasion game]()
+[Download alien invasion game](#https://github.com/babyAnnie/python_game/releases/download/python/alien_invasion.exe)
