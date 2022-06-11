@@ -35,4 +35,4 @@ pip install --user xxx.whl（pygame文件名）
 <img src="./images/game.png" alt="页面效果图" />
 
 ## 游戏下载
-[下载《外星人入侵》游戏](#https://github.com/babyAnnie/python_game/releases/download/python/alien_invasion.exe)
+[下载《外星人入侵》游戏](https://github.com/babyAnnie/python_game/releases/download/python/alien_invasion.exe)
