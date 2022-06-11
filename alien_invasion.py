@@ -1,7 +1,7 @@
 import pygame
+import game_functions as gf
 from settings import Settings
 from ship import Ship
-import game_functions as gf
 from pygame.sprite import Group
 from game_stats import GameStats
 from button import Button
@@ -20,6 +20,7 @@ def run_game():
 
     # 创建Play按钮
     play_button = Button(ai_settings, screen, "Play")
+    continue_button = Button(ai_settings, screen, "Continue")
 
     # 创建一个用于存储游戏统计信息的实例, 并创建记分牌
     stats = GameStats(ai_settings)
@@ -43,7 +44,7 @@ def run_game():
             ship.update()
             gf.update_bullets(ai_settings, screen, stats, sb, ship, bullets, aliens)
             gf.update_aliens(ai_settings, screen, stats, sb, ship, aliens, bullets)
-        gf.update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_button)
+        gf.update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_button, continue_button)
 
 
 run_game()

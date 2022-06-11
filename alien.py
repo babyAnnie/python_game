@@ -1,5 +1,13 @@
 import pygame
 from pygame.sprite import Sprite
+# 获取路径
+import os, sys
+
+
+def get_resource_path(relative_path):
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
 
 
 class Alien(Sprite):
@@ -12,7 +20,7 @@ class Alien(Sprite):
         self.ai_settings = ai_settings
 
         # 加载外星人图像，并设置其rect属性
-        self.image = pygame.image.load('images/alien.bmp')
+        self.image = pygame.image.load(get_resource_path('images/alien.png'))
         self.rect = self.image.get_rect()
 
         # 每个外星人最初都在屏幕左上角附近

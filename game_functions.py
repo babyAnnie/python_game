@@ -5,13 +5,28 @@ from alien import Alien
 from time import sleep
 import json
 import all_music as am
+import os
+import sys
+
+
+def get_resource_path(relative_path):
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
 
 
 def play_bg_music():
-    # 检查音乐流播放，有返回True，没有返回False    如果没有音乐流则选择播放
+    # 检查背景音乐流播放，有返回True，没有返回False    如果没有音乐流则选择播放
     """ 此方法同Sound方法一样！都是以流的方式呈现。一直播放需要使用while循环！"""
     if not pygame.mixer.music.get_busy():
-        pygame.mixer.music.play()
+        pygame.mixer.music.play(loops=0,start=0)
+
+
+def pause_bg_music():
+    # 暂停背景音乐
+    """ 此方法同Sound方法一样！都是以流的方式呈现。一直播放需要使用while循环！"""
+    if not pygame.mixer.music.get_busy():
+        pygame.mixer.music.pause()
 
 
 def check_high_score(stats, sb):
@@ -140,14 +155,30 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets, stats, sb, a
         ship.moving_left = True
     elif event.key == pygame.K_SPACE:
         fire_bullet(ai_settings, screen, ship, bullets)
-    elif event.key == pygame.K_q:
-        with open('high_score.json', 'w') as f_obj:
+    elif event.key == pygame.K_ESCAPE:
+        # 退出游戏
+        with open(get_resource_path('high_score.json'), 'w') as f_obj:
             json.dump(stats.high_score, f_obj)
+        pygame.quit()
         sys.exit()
-    elif event.key == pygame.K_p:
+    elif event.key == pygame.K_r:
+        # 重新开始游戏
         start_play_game(ai_settings, screen, stats, sb, ship, aliens, bullets)
+        stats.game_active = True
+        stats.continue_active = False
     elif event.key == pygame.K_w:
-        sleep(5)
+        # 暂停游戏
+        # 显示光标
+        pygame.mouse.set_visible(True)
+        stats.continue_active = True
+        stats.game_active = False
+        # pause_bg_music()
+    #     sleep(3600)
+    elif event.key == pygame.K_c:
+        # 继续游戏
+        pygame.mouse.set_visible(False)
+        stats.continue_active = False
+        stats.game_active = True
 
 
 def check_keyup_events(event, ship):
@@ -162,7 +193,9 @@ def check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens,
     """ 在玩家单击Play按钮时开始新游戏"""
     button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
     if button_clicked:
-        start_play_game(ai_settings, screen, stats, sb, ship, aliens, bullets)
+        # start_play_game(ai_settings, screen, stats, sb, ship, aliens, bullets)
+        stats.game_active = True
+        stats.continue_active = False
 
 
 def start_play_game(ai_settings, screen, stats, sb, ship, aliens, bullets):
@@ -195,8 +228,9 @@ def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bull
     """ 响应按键和鼠标事件"""
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            with open('high_score.json', 'w') as f_obj:
+            with open(get_resource_path('high_score.json'), 'w') as f_obj:
                 json.dump(stats.high_score, f_obj)
+            pygame.quit()
             sys.exit()
         elif event.type == pygame.KEYDOWN:
             check_keydown_events(event, ai_settings, screen, ship, bullets, stats, sb, aliens)
@@ -207,7 +241,7 @@ def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bull
             check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets, mouse_x, mouse_y)
 
 
-def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_button):
+def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_button, continue_button):
     """ 更新屏幕上的图像，并切换到新屏幕"""
     # 每次循环时都会重绘屏幕
     screen.fill(ai_settings.bg_color)
@@ -219,8 +253,10 @@ def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_bu
     # 显示得分
     sb.show_score()
     # 如果游戏处于非活动状态，就绘制Play按钮
-    if stats.game_active is False:
+    if (stats.game_active is False) & (stats.continue_active is False):
         play_button.draw_button()
+    elif stats.continue_active is True:
+        continue_button.draw_button()
     # 让最近绘制的屏幕可见
     pygame.display.flip()
 

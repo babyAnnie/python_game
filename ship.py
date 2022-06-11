@@ -1,6 +1,15 @@
 import pygame
 from pygame.sprite import Sprite
 
+import os
+import sys
+
+
+def get_resource_path(relative_path):
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
+
 
 class Ship(Sprite):
 
@@ -11,7 +20,7 @@ class Ship(Sprite):
         self.ai_settings = ai_settings
 
         # 加载飞船图像并获取其外接矩形
-        self.image = pygame.image.load('images/ship.bmp')
+        self.image = pygame.image.load(get_resource_path('images/ship.bmp'))
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 

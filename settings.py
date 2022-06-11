@@ -6,7 +6,7 @@ class Settings():
         # 屏幕设置
         self.screen_width = 1200
         self.screen_height = 750
-        self.bg_color = (230, 230, 230)
+        self.bg_color = (255, 255, 255)
 
         """ 飞船的设置"""
         self.ship_limit = 3
@@ -21,9 +21,9 @@ class Settings():
         self.fleet_drop_speed = 10
 
         """ 以什么样的速度加快游戏节奏"""
-        self.speedup_scale = 1.1
+        self.speedup_scale = 1.2
         """ 外星人点数的提高速度"""
-        self.score_scale = 1.5
+        self.score_scale = 1.2
 
         self.initialize_dynamic_settings()
 
@@ -37,7 +37,7 @@ class Settings():
         self.fleet_direction = 1
 
         # 记分
-        self.alien_points = 50
+        self.alien_points = 10 * self.speedup_scale
 
     def increase_speed(self):
         """ 提高速度设置"""
