@@ -1,4 +1,6 @@
-# 游戏《外星人入侵》
+# 游戏《外星人入侵》 :alien: 
+
+[中文](./README.zh.md) | [English](./README.md)
 
 - [游戏说明](#游戏说明)
 - [运行环境](#运行环境)
@@ -8,6 +10,16 @@
 ## 游戏说明
 
 这是一个射击类游戏。当有外星人入侵，火箭射击出子弹，被子弹击中的外星人就会消失。
+
+| 按键      | 功能说明 |
+| :-------: | ------- |
+| ←         | 火箭向左移动 |
+| →         | 火箭向右移动 |
+| Space     | 火箭发射子弹 |
+| r         | 重新开始游戏 |
+| w         | 暂停游戏 |
+| c         | 继续游戏 |
+| Esc       | 退出游戏 |
 
 ## 运行环境
 > pygame  
@@ -36,3 +48,5 @@ pip install --user xxx.whl（pygame文件名）
 
 ## 游戏下载
 [下载《外星人入侵》游戏](https://github.com/babyAnnie/python_game/releases/download/python/alien_invasion.exe)
+
+**Enjoy! ❤**

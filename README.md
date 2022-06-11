@@ -1,4 +1,6 @@
-#  The game Alien Invasion
+#  The game Alien Invasion :alien: 
+
+[中文](./README.zh.md) | [English](./README.md)
 
 - [Game Description] (#Game Description)
 - [Operating Environment] (#Operating Environment)
@@ -8,6 +10,17 @@
 ## Game Description
 
 This is a shooting game. When an alien invades, the rocket shoots out a bullet, and the alien hit by the bullet will disappear.
+
+
+| Press the key | Feature Description |
+| :-------: | ------- |
+| ←         | The rocket moves to the left |
+| →         | The rocket moves to the right |
+| Space     | Rockets fire bullets |
+| r         | Restart the game |
+| w         | Pause the game |
+| c         | Continue the game |
+| Esc       | Quit the game |
 
 ## Operating Environment
 > pygame  
@@ -22,3 +35,5 @@ This is a shooting game. When an alien invades, the rocket shoots out a bullet, 
 
 ## Game download
 [Download alien invasion game](https://github.com/babyAnnie/python_game/releases/download/python/alien_invasion.exe)
+
+**Enjoy! ❤**
